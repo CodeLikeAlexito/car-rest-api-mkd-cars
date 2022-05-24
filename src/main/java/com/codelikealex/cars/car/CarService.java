@@ -1,7 +1,9 @@
 package com.codelikealex.cars.car;
 
 import com.codelikealex.cars.entities.Car;
+import com.codelikealex.cars.exceptions.CustomResponseStatusException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,8 +32,15 @@ public class CarService {
 //        }
 
         Car car = Car.createPostWithFullDetails(carDto.getTitle(), carDto.getPrice(), carDto.getShortDescription(),
-                carDto.getDescription(), carDto.getAdditionalInformation(), carDto.getCarLocation(), "TEST-STATIC-USER");
+                carDto.getDescription(), carDto.getAdditionalInformation(), carDto.getCarLocation(), carDto.getClientUsername());
         return carRepository.save(car);
     }
 
+    public Car getCarPostByAuthor(String author) {
+        return carRepository.findByAuthor(author).orElseThrow(() -> new CustomResponseStatusException(HttpStatus.NOT_FOUND, "some err code", "some err reason"));
+    }
+
+    public Car getCarPostById(Long clientId) {
+        return carRepository.findById(clientId).orElseThrow(() -> new CustomResponseStatusException(HttpStatus.NOT_FOUND, "some err code", "some err reason"));
+    }
 }

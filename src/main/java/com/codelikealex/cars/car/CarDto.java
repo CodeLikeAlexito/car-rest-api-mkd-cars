@@ -10,4 +10,5 @@ public class CarDto {
     private String description;
     private String additionalInformation;
     private String carLocation;
+    private String clientUsername;
 }
