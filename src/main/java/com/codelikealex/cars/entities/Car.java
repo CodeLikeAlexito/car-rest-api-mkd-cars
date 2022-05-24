@@ -30,6 +30,7 @@ public final class Car extends DateAudit {
     @Column(name="author")
     private String author;
 
+    // Here author will be always the logged user ( client )
     private Car(String title, String price, String shortDescription, String description, String additionalInformation, String carLocation, String author) {
         this.title = title;
         this.price = price;

@@ -21,8 +21,13 @@ public class CarController {
         return  ResponseEntity.ok(car);
     }
 
-    @GetMapping("/{clientId}")
-    public Car getCarPost(@PathVariable Long clientId) {
+    @GetMapping("/id/{clientId}")
+    public Car getCarPostById(@PathVariable Long clientId) {
         return carService.getCarPostById(clientId);
+    }
+
+    @GetMapping("/author/{author}")
+    public Car getCarPostById(@PathVariable String author) {
+        return carService.getCarPostByAuthor(author);
     }
 }
